@@ -7,3 +7,10 @@ body,
 #app {
     height: 100%;
 }
+
+/* 登录页背景样式：深蓝色带小图案 */
+.login-bg {
+    background-color: #487dd3;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
