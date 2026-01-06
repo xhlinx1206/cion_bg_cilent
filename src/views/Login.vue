@@ -15,7 +15,7 @@
             </div>
 
             <div class="px-8 pt-16 pb-8">
-                <h2 class="text-center text-2xl font-medium mb-4">登录</h2>
+                <h2 class="text-center text-2xl font-medium mb-4">{{ t('login.title') }}</h2>
                 <form @submit.prevent="onSubmit">
                     <div class="mb-4">
                         <div class="flex items-center border rounded overflow-hidden">
@@ -24,7 +24,8 @@
                                     <path d="M12 12a4 4 0 100-8 4 4 0 000 8z" fill="#94a3b8" />
                                 </svg>
                             </div>
-                            <input v-model="username" class="flex-1 p-3 outline-none" placeholder="用户名" />
+                            <input v-model="username" class="flex-1 p-3 outline-none"
+                                :placeholder="t('login.username')" />
                         </div>
                     </div>
 
@@ -37,21 +38,21 @@
                                 </svg>
                             </div>
                             <input v-model="password" type="password" class="flex-1 p-3 outline-none"
-                                placeholder="密码" />
+                                :placeholder="t('login.password')" />
                         </div>
                     </div>
 
                     <div class="flex items-center justify-between mb-4 text-sm text-gray-600">
                         <label class="flex items-center">
-                            <input type="checkbox" class="mr-2" /> 保持会话
+                            <input type="checkbox" class="mr-2" /> {{ t('keep_session') }}
                         </label>
                     </div>
 
                     <div class="mb-2 text-red-500 text-sm" v-if="error">{{ error }}</div>
                     <button :disabled="loading"
                         class="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-full">
-                        <span v-if="!loading">登录</span>
-                        <span v-else>登录中...</span>
+                        <span v-if="!loading">{{ t('login.submit') }}</span>
+                        <span v-else>{{ t('login.logging') }}</span>
                     </button>
                 </form>
             </div>
@@ -61,6 +62,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/store'
 import { login } from '@/api/auth'
@@ -100,7 +102,8 @@ export default defineComponent({
                 loading.value = false
             }
         }
-        return { username, password, onSubmit, loading, error }
+        const { t } = useI18n()
+        return { username, password, onSubmit, loading, error, t }
     }
 })
 </script>
